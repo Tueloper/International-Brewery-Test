@@ -1,2 +1,2 @@
-# apricot-backend
+# Pericot Backend
 Backend of Zicli inventory application.
