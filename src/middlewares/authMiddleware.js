@@ -92,8 +92,7 @@ const AuthMiddleware = {
    */
   async verifyPasswordReset(req, res, next) {
     try {
-      const schema = req.body.email ? passwordResetEmailSchema : changePasswordSchema;
-      const { error } = validate(req.body, schema);
+      const { error } = validate(req.body, changePasswordSchema);
       if (error) {
         const message = 'Please make sure the passwords match';
         return errorResponse(res, { code: 400, message });
