@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       - image: circleci/node:10.16.0
-    working_directory: ~/inventory-backend
+    working_directory: ~/brewery-backend
     environment:
       NODE_ENV: test
       DATABASE_URL: process.env.DATABASE_URL_TEST

@@ -1,7 +1,7 @@
 {
-  "name": "inventory-backend",
+  "name": "brewery-backend",
   "version": "1.0.0",
-  "description": "zicli synergy inventory backend",
+  "description": "zicli synergy brewery backend",
   "main": "index.js",
   "scripts": {
     "lint": "eslint",
@@ -17,20 +17,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zicli-synergy/inventory-backend.git"
+    "url": "git+https://github.com/Tueloper/International-Brewery-Test.git"
   },
   "keywords": [
     "backend",
-    "inventory",
-    "zicli",
-    "manufacturing"
+    "brewey",
+    "test"
   ],
-  "author": "Zicli Synergy Software Team",
+  "author": "Tochukwu Ozurumba",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/zicli-synergy/inventory-backend/issues"
+    "url": "https://github.com/Tueloper/International-Brewery-Test/issues"
   },
-  "homepage": "https://github.com/zicli-synergy/inventory-backend#readme",
+  "homepage": "https://github.com/Tueloper/International-Brewery-Test#readme",
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
     "@hapi/joi": "^15.1.1",
@@ -54,11 +53,6 @@
     "methods": "^1.1.2",
     "morgan": "^1.9.1",
     "multer": "^1.4.2",
-    "passport": "^0.4.0",
-    "passport-google-oauth": "^2.0.0",
-    "passport-local": "^1.0.0",
-    "paystack": "^2.0.1",
-    "paystack-node": "^0.2.4",
     "pg": "^7.12.1",
     "pg-hstore": "^2.3.3",
     "request": "^2.87.0",
