@@ -35,6 +35,7 @@ const AuthController = {
         lastName: req.body.lastName,
         email: req.body.email,
         password: hashPassword(req.body.password),
+        verified: true
       };
       const user = await addEntity(User, { ...body });
       user.token = createToken({

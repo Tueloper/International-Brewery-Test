@@ -28,7 +28,7 @@ router.post('/signup', verifySignup, signup);
 router.post('/login', verifyLogin, login);
 router.post('/reset-password', authenticate, verifyPasswordReset, resetPassword);
 router.post('/logout', authenticate, logoutUser);
-router.put('/profile', verifyProfileUpdate, updateProfile);
+router.put('/profile', authenticate, verifyProfileUpdate, updateProfile);
 router.get('/profile', authenticate, getProfile);
 
 export default router;
