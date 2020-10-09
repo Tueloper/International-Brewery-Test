@@ -51,10 +51,9 @@ const AuthMiddleware = {
   async verifyLogin(req, res, next) {
     try {
       validateLogin(req.body);
-      const { usernameOrEmail } = req.body;
-      let user = await findByKey(User, { email: usernameOrEmail });
-      if (!user) user = await findByKey(User, { userName: usernameOrEmail });
-      if (!user) return errorResponse(res, { code: 404, message: 'username or email does not match anything in our database' });
+      const { email } = req.body;
+      const user = await findByKey(User, { email });
+      if (!user) return errorResponse(res, { code: 404, message: 'email does not match anything in our database' });
       req.userData = user;
       next();
     } catch (error) {
