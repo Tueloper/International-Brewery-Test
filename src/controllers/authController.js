@@ -2,7 +2,6 @@
 import { GeneralService } from '../services';
 import { Toolbox } from '../utils';
 import database from '../models';
-import { env } from '../config';
 
 const {
   successResponse,
@@ -10,7 +9,6 @@ const {
   createToken,
   hashPassword,
   comparePassword,
-  verifyToken,
 } = Toolbox;
 const {
   addEntity,
@@ -20,10 +18,6 @@ const {
 const {
   User,
 } = database;
-// const {
-//   ADMIN_KEY,
-//   CLIENT_URL
-// } = env;
 
 const AuthController = {
   /**
@@ -39,27 +33,17 @@ const AuthController = {
       const body = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        userName: req.body.userName,
         email: req.body.email,
         password: hashPassword(req.body.password),
       };
       const user = await addEntity(User, { ...body });
-      // let role;
-      // if (req.body.supplier) role = await addEntity(RoleUser, { userId: user.id, roleId: 3 });
-      // else role = await addEntity(RoleUser, { userId: user.id, roleId: 4 });
-
       user.token = createToken({
         email: user.email,
         id: user.id,
         userName: user.userName,
-        // roleId: role.roleId,
         firstName: user.firstName,
         verified: user.verified
       });
-      // TODO: uncomment for production
-      // const emailSent = await sendVerificationEmail(req, user);
-      // TODO: delete bottom line for production
-      // const emailSent = true;
       res.cookie('token', user.token, { maxAge: 70000000, httpOnly: true });
       return successResponse(res, { user }, 201);
     } catch (error) {

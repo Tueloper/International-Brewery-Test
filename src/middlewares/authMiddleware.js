@@ -30,11 +30,9 @@ const AuthMiddleware = {
   async verifySignup(req, res, next) {
     try {
       validateSignup(req.body);
-      const { email, userName } = req.body;
+      const { email } = req.body;
       const user = await findByKey(User, { email });
-      const userNameUnique = await findByKey(User, { userName });
       if (user) return errorResponse(res, { code: 409, message: `User with email "${email}" already exists` });
-      if (userNameUnique) return errorResponse(res, { code: 409, message: `User with userName "${userName}" already exists` });
       next();
     } catch (error) {
       errorResponse(res, { code: 400, message: error });
