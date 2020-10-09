@@ -51,10 +51,9 @@ const AuthMiddleware = {
   async verifyLogin(req, res, next) {
     try {
       validateLogin(req.body);
-      const { usernameOrEmail } = req.body;
-      let user = await findByKey(User, { email: usernameOrEmail });
-      if (!user) user = await findByKey(User, { userName: usernameOrEmail });
-      if (!user) return errorResponse(res, { code: 404, message: 'username or email does not match anything in our database' });
+      const { email } = req.body;
+      const user = await findByKey(User, { email });
+      if (!user) return errorResponse(res, { code: 404, message: 'email does not match anything in our database' });
       req.userData = user;
       next();
     } catch (error) {
@@ -93,8 +92,7 @@ const AuthMiddleware = {
    */
   async verifyPasswordReset(req, res, next) {
     try {
-      const schema = req.body.email ? passwordResetEmailSchema : changePasswordSchema;
-      const { error } = validate(req.body, schema);
+      const { error } = validate(req.body, changePasswordSchema);
       if (error) {
         const message = 'Please make sure the passwords match';
         return errorResponse(res, { code: 400, message });

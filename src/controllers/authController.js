@@ -35,6 +35,7 @@ const AuthController = {
         lastName: req.body.lastName,
         email: req.body.email,
         password: hashPassword(req.body.password),
+        verified: true
       };
       const user = await addEntity(User, { ...body });
       user.token = createToken({
@@ -63,15 +64,12 @@ const AuthController = {
     try {
       const { password } = req.body;
       const user = req.userData;
-      // const { roleId } = await findByKey(RoleUser, { userId: user.id });
       if (!comparePassword(password, user.password)) return errorResponse(res, { code: 401, message: 'incorrect password or email' });
       user.token = createToken({
         email: user.email,
         id: user.id,
-        // roleId,
         userName: user.userName,
         firstName: user.firstName,
-        verified: user.verified
       });
       res.cookie('token', user.token, { maxAge: 70000000, httpOnly: true });
       return successResponse(res, { message: 'Login Successful', token: user.token });
