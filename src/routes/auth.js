@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { AuthMiddleware } from '../middlewares';
-import { AuthController } from '../controllers';
+import { AuthMiddleware, UserMiddleware } from '../middlewares';
+import { AuthController, UserController } from '../controllers';
 
 const router = Router();
 const {
@@ -8,20 +8,27 @@ const {
   verifyLogin,
   authenticate,
   verifyPasswordReset,
-  // checkUsername,
 } = AuthMiddleware;
+const {
+  verifyProfileUpdate,
+} = UserMiddleware;
 const {
   signup,
   login,
   resetPassword,
   logoutUser,
-  // updateUsername
 } = AuthController;
+const {
+  updateProfile,
+  getProfile,
+} = UserController;
 
 
 router.post('/signup', verifySignup, signup);
 router.post('/login', verifyLogin, login);
 router.post('/reset-password', authenticate, verifyPasswordReset, resetPassword);
 router.post('/logout', authenticate, logoutUser);
+router.put('/profile', verifyProfileUpdate, updateProfile);
+router.get('/profile', authenticate, getProfile);
 
 export default router;
